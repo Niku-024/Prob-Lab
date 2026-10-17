@@ -30,9 +30,23 @@ $$\text{error} = \frac{\text{Area}(R)\,\sigma}{\sqrt{N}}$$
 
 ### Independence and factorization
 
-Since $\sqrt{4/(L_xL_y)} = \sqrt{2/L_x}\,\sqrt{2/L_y}$, the density splits into a function of $x$ times a function of $y$:
+The normalization constant splits into one factor per axis:
 
-$$|\Psi(x,y)|^2 = |\psi_{n_x}(x)|^2 \cdot |\psi_{n_y}(y)|^2, \qquad \psi_n(t) = \sqrt{\tfrac{2}{L}} \sin\left(\tfrac{n\pi t}{L}\right)$$
+```math
+\sqrt{\frac{4}{L_x L_y}} = \sqrt{\frac{2}{L_x}} \cdot \sqrt{\frac{2}{L_y}}
+```
+
+so the wave function is a product of two 1D wave functions, $`\Psi(x,y) = \psi_{n_x}(x)\,\psi_{n_y}(y)`$, where
+
+```math
+\psi_n(t) = \sqrt{\frac{2}{L}} \, \sin\left(\frac{n\pi t}{L}\right)
+```
+
+and the density splits into a function of $`x`$ times a function of $`y`$:
+
+```math
+|\Psi(x,y)|^2 = |\psi_{n_x}(x)|^2 \cdot |\psi_{n_y}(y)|^2
+```
 
 If $f$ is the probability density function, this means
 
