@@ -2,11 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 """
-consider a particle in a 2-dimensional box of length Lx and breadth Ly
-wave function of the particle is -> Psi(x,y) = sqrt(4/(Lx*Ly))*sin(n_x*pi*x/Lx)*sin(n_y*pi*y/Ly)
-by the Born interpretation, probability density is |Psi(x,y)|^2
-probability of finding particle between x = [x1,x2] and y = [y1,y2] is int(|Psi(x,y)|^2)dxdy in the given range
-
 notation we will be using :
 Lx,Ly = length and breadth of the 2-dimensional box respectively
 n_x,n_y = energy levels
@@ -15,18 +10,16 @@ y1,y2 = range of y
 N = no. of trials
 """
 
-# return array that holds the value of Psi_xy for each point [with co-responding indices in x and y arrays]
 def psi(x,y,n_x,n_y,Lx,Ly):
     # wave function of a particle in a 2D infinite well
     return np.sqrt(4/(Lx*Ly)) * np.sin(n_x * np.pi * x / Lx) * np.sin(n_y * np.pi * y / Ly)
 
-# return array that holds values for Probability Density at each randomly generated point in the range
 def density(Psi_xy):
     # born probability density |Psi|^2
     return np.abs(Psi_xy)**2
 
 def psi_1d(x, n, L):
-    # 1D infinite-well wave function (the separable factor of psi)
+    # 1D infinite-well wave function 
     return np.sqrt(2 / L) * np.sin(n * np.pi * x / L)
 
 def mc_probability(n_x, n_y, Lx, Ly, x_range, y_range, N):
@@ -38,25 +31,20 @@ def mc_probability(n_x, n_y, Lx, Ly, x_range, y_range, N):
     y = np.random.uniform(y1, y2, size=N)
     psi_xy = psi(x,y,n_x,n_y, Lx, Ly)
     prob_density = density(psi_xy)
-    # taking the mean of computed probability densities
     avg_density = prob_density.mean()
     area = abs(x2 - x1) * abs(y2 - y1)
     # by definition, avg_density = int(prob_density dxdy)/[int(dx)*int(dy)] = P/[(x2-x1)*(y2-y1)]
     # so, P = avg_density*(x2-x1)*(y2-y1) = avg_density * area
     P = avg_density * area
     # for error, est. error = sigma/sqrt(N) where sigma = standard deviation
-    density_dev = prob_density.std(ddof=1) # deviation within density
-    sigma = area * density_dev # deviation within the integral
+    density_dev = prob_density.std(ddof=1)
+    sigma = area * density_dev
     error = sigma/np.sqrt(N)
     return P, error
 
-
 # we know X and Y are independent variables, since |Psi(x,y)|^2 = |g(x)|^2*|h(y)|^2
 # i.e f_X,Y(X=x,Y=y) = f_X(X=x)*f_Y(Y=y) for all x and y [ f is the probability distribution function]
-# we can use the fact that x and y are independent
-# so the joint pdf is (Prob_density)_xy = (Prob_density)_x * (Prob_density)_y
 # so P(x1<=x<=x2,y1<=y<=y2) = P(x1<=x<=x2)*P(y1<=y<=y2)
-# applying this result :
 def mc_probability_factorized(x_range, y_range, N, n_x, n_y, Lx, Ly):
     def mc_1d(a, b, n, L):
         t = np.random.uniform(a,b, size = N)
@@ -92,7 +80,7 @@ def plot_heatmap(n_x, n_y, Lx, Ly, x_range, y_range, exact):
     # plotting heatmap of |Psi|^2 over the 2d box, with the integration region outlined in red
     g = np.linspace(0, Lx, 300)
     h = np.linspace(0, Ly, 300)
-    X, Y = np.meshgrid(g, h)                  # grid of (x, y) points
+    X, Y = np.meshgrid(g, h)
     D = density(psi(X, Y, n_x, n_y, Lx, Ly))
 
     fig, ax = plt.subplots()
@@ -114,11 +102,11 @@ if __name__ == "__main__":
     # we would like our results to be reproducible
     # hence picking a seed = 42 (Answer to the Ultimate Question of Life, the Universe, and Everything)
     np.random.seed(42)
-    Lx, Ly = 1, 1                # length and breadth of the box
-    n_x, n_y = 1, 1              # energy levels
-    x_range = (0, Lx / 2)    # range of x
-    y_range = (0, Ly / 2)    # range of y
-    N = 1_000_000                # number of samples
+    Lx, Ly = 1, 1
+    n_x, n_y = 1, 1
+    x_range = (0, Lx / 2)
+    y_range = (0, Ly / 2)
+    N = 1_000_000
 
     # checking w.r.t exact formula
     assert np.isclose(exact_1d(0, Lx, n_x, Lx), 1)      # normalization
@@ -133,8 +121,6 @@ if __name__ == "__main__":
     print(f"Monte Carlo (2D)            : {P:.6f} +/- {error:.6f}")
     print(f"Monte Carlo (P_x * P_y)     : {P_fact:.6f}")
 
-    # convergence study
-
     # use 9 sample sizes spaced evenly on a log scale, from 10^2 to 10^6
     sizes = np.logspace(2, 6, 9).astype(int)
     # each N is run 50 times and the absolute errors are averaged since a single iteration is too noisy to show a trend
@@ -147,4 +133,3 @@ if __name__ == "__main__":
     plt.legend()
     plt.savefig("convergence.png", dpi=150)
     plt.show()
-
