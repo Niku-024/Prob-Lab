@@ -115,7 +115,7 @@ if __name__ == "__main__":
     # hence picking a seed = 42 (Answer to the Ultimate Question of Life, the Universe, and Everything)
     np.random.seed(42)
     Lx, Ly = 1, 1                # length and breadth of the box
-    n_x, n_y = 3, 1              # energy levels
+    n_x, n_y = 1, 1              # energy levels
     x_range = (0, Lx / 2)    # range of x
     y_range = (0, Ly / 2)    # range of y
     N = 1_000_000                # number of samples
