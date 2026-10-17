@@ -84,7 +84,7 @@ For a general interval, call this antiderivative $`F(t)`$ and take $`F(b) - F(a)
 
 ## Results
 
-Parameters: $`n_x = 3`$, $`n_y = 1`$, $`L_x = L_y = 1`$, region $`[0, L_x/2] \times [0, L_y/2]`$, $`N = 10^6`$, seed 42.
+Parameters: $`n_x = 1`$, $`n_y = 1`$, $`L_x = L_y = 1`$, region $`[0, L_x/2] \times [0, L_y/2]`$, $`N = 10^6`$, seed 42.
 
 | Method | P |
 |---|---|
