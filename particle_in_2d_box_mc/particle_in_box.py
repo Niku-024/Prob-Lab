@@ -131,5 +131,5 @@ if __name__ == "__main__":
     plt.xlabel("N (samples)")
     plt.ylabel("absolute error = |estimate - exact|")
     plt.legend()
-    plt.savefig("convergence.png", dpi=150)
+    plt.savefig("mc_error.png", dpi=150)
     plt.show()
