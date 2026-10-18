@@ -98,13 +98,13 @@ For this half-box region the exact answer is 1/4 for any energy levels, since $`
 
 ![Heatmap of the probability density with the integration region outlined in red](heatmap.png)
 
-*The red rectangle is the integration region. The number of bright lobes along each axis equals the energy level.*
+*The integration region is outlined in reg. The number of bright lobes along each axis is equal to the energy level.*
 
 ### Convergence
 
 ![Log-log plot of Monte Carlo error against sample size, following the 1/sqrt(N) reference line](mc_error.png)
 
-*Mean absolute error over 50 trials per sample size. The error falls as $`1/\sqrt{N}`$, as expected for Monte Carlo.*
+*Mean absolute error over 50 trials per sample size. The error falls as $`1/\sqrt{N}`$*
 
 ## How to run
 
