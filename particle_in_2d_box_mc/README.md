@@ -98,7 +98,7 @@ For this half-box region the exact answer is 1/4 for any energy levels, since $`
 
 ![Heatmap of the probability density with the integration region outlined in red](heatmap.png)
 
-*The integration region is outlined in reg. The number of bright lobes along each axis is equal to the energy level.*
+*The integration region is outlined in red. The number of bright lobes along each axis is equal to the energy level.*
 
 ### Convergence
 
